@@ -7,12 +7,21 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
 
 export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  data(){
+    return{
+      info:{}
+
+    }
+  },
+mounted: function(){axios.get('/api/?&doctype=json&type=AUTO&i=%E8%B5%B0%E8%B7%AF').then(response => (this.info = response))}
 }
 </script>
 
