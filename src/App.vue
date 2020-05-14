@@ -1,27 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text"  @keyup.enter="specifiName($event)" /> 
+    <h2>{{info}}</h2>
+    <img alt="Vue logo" src="https://dpic.tiankong.com/nh/8k/QJ8480392495.jpg?x-oss-process=style/794ws">
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 import axios from 'axios'
-
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
+  // components: {
+  //   HelloWorld
+  // },
   data(){
     return{
-      info:{}
+      info:'',
+      val:''
+
 
     }
   },
-mounted: function(){axios.get('/api/?&doctype=json&type=AUTO&i=%E8%B5%B0%E8%B7%AF').then(response => (this.info = response))}
+  methods:{
+    specifiName(e) {
+        this.val=e.target.value
+        console.log(this.val)
+  axios.get('/api/translate', {
+    params: {
+      doctype: 'json',
+      type: 'AUTO',
+      i:this.val
+    }
+  })
+    .then(response => {
+      this.info = response.data.translateResult[0][0].tgt
+      // this.info=response.data.translateResult[0][0].tgt;
+      console.log(this.info)
+    })
+    }
+
+  }
 }
 </script>
 

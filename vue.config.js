@@ -1,8 +1,8 @@
 module.exports ={
-    runtimeCompiler: true,
+  devServer: {
     proxy: {
         '/api': {
-            target: 'http://fanyi.youdao.com/translate',
+            target: 'http://fanyi.youdao.com/',
             changeOrigin: true,
             ws: true,
             pathRewrite: {
@@ -10,4 +10,5 @@ module.exports ={
             }
         }
     }
-};
+  }
+}
